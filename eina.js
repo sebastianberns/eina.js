@@ -15,6 +15,28 @@ var eina = {
   	return { w: x, h: y }
   },
   
+	offset: function( _o )
+	// eina.offset( _o )
+	// 
+	// Calculate element document offset
+	// Parameter:
+	//   _o: element
+	// Returns object {
+	//   l: offset left
+	//   t: offset top
+	// }
+	// http://www.quirksmode.org/js/findpos.html
+	{
+		var l = t = 0
+		if( _o.offsetParent) {
+		  do {
+		  			l += _o.offsetLeft
+		  			t += _o.offsetTop
+		  } while (_o = _o.offsetParent)
+		  return { l:l, t:t }
+		}
+	},
+  
   retina: function()
   // eina.retina()
   // 
