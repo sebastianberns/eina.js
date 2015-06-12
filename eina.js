@@ -15,6 +15,45 @@ var eina = {
   	return { w: x, h: y }
   },
   
+  orientation: function()
+  // eina.orientation()
+  // 
+  // Get viewport orientation
+  // Returns boolean
+  //   true:  landscape
+  //   false: portrait
+  {
+    var vp = eina.vp()
+    return vp.w > vp.h
+  },
+  
+  orientationLandscape: function()
+  // eina.orientationLandscape()
+  // 
+  // Check if viewport orientation is landscape
+  // Returns boolean
+  {
+    return eina.orientation() === true
+  },
+  
+  orientationPortrait: function()
+  // eina.orientationPortrait()
+  // 
+  // Check if viewport orientation is portrait
+  // Returns boolean
+  {
+    return eina.orientation() === false
+  },
+  
+  retina: function()
+  // eina.retina()
+  // 
+  // Check for retina resolution
+  // Returns boolean
+  {
+    return window.devicePixelRatio > 1
+  },
+  
 	offset: function( _o )
 	// eina.offset( _o )
 	// 
@@ -37,13 +76,27 @@ var eina = {
 		}
 	},
   
-  retina: function()
-  // eina.retina()
+  touch: function() 
+  // eina.touch()
   // 
-  // Check for retina resolution
+  // Check for touch event support
+  // Desktop browser also support those, though
   // Returns boolean
   {
-    return window.devicePixelRatio > 1
+    return 'ontouchstart' in window || 'onmsgesturechange' in window
+  },
+  
+  mouseMove: function()
+  // eina.mouseMove()
+  // 
+  // A simple way to check if your on a desktop or not
+  // Listen for mouse move
+  // Add class hasmouse to html tag
+  {
+    document.addEventListener('mousemove', function(){
+      eina.addClass( document.documentElement, 'hasmouse' )
+//      document.removeEventListener('mousemove')
+    })
   },
   
   video: function()
@@ -102,6 +155,16 @@ var eina = {
     }
     else 
       return undefined
+  },
+  
+  placeholder: function() 
+  // eina.placeholder()
+  // 
+  // Test for input placeholder support
+  // Returns boolean
+  {
+    var i = document.createElement('input')
+    return 'placeholder' in i
   },
   
   addClass: function( el, className )
@@ -211,59 +274,6 @@ var eina = {
 
       return result
     }
-  },
-  
-  orientation: function()
-  // eina.orientation()
-  // 
-  // Get viewport orientation
-  // Returns boolean
-  //   true:  landscape
-  //   false: portrait
-  {
-    var vp = eina.vp()
-    return vp.w > vp.h
-  },
-  
-  orientationLandscape: function()
-  // eina.orientationLandscape()
-  // 
-  // Check if viewport orientation is landscape
-  // Returns boolean
-  {
-    return eina.orientation() === true
-  },
-  
-  orientationPortrait: function()
-  // eina.orientationPortrait()
-  // 
-  // Check if viewport orientation is portrait
-  // Returns boolean
-  {
-    return eina.orientation() === false
-  },
-  
-  touch: function() 
-  // eina.touch()
-  // 
-  // Check for touch event support
-  // Desktop browser also support those, though
-  // Returns boolean
-  {
-    return 'ontouchstart' in window || 'onmsgesturechange' in window
-  },
-  
-  mouseMove: function()
-  // eina.mouseMove()
-  // 
-  // A simple way to check if your on a desktop or not
-  // Listen for mouse move
-  // Add class hasmouse to html tag
-  {
-    document.addEventListener('mousemove', function(){
-      eina.addClass( document.documentElement, 'hasmouse' )
-//      document.removeEventListener('mousemove')
-    })
   }
   
 }
