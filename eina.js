@@ -86,19 +86,6 @@ var eina = {
     return 'ontouchstart' in window || 'onmsgesturechange' in window
   },
   
-  mouseMove: function()
-  // eina.mouseMove()
-  // 
-  // A simple way to check if your on a desktop or not
-  // Listen for mouse move
-  // Add class hasmouse to html tag
-  {
-    document.addEventListener('mousemove', function(){
-      eina.addClass( document.documentElement, 'hasmouse' )
-//      document.removeEventListener('mousemove')
-    })
-  },
-  
   video: function()
   // eina.video()
   // 
