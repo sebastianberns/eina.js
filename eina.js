@@ -75,6 +75,23 @@ var eina = {
 		  return { l:l, t:t }
 		}
 	},
+	
+	scrollTop : function()
+	// eina.scrollTop()
+	// 
+	// Get page vertical scroll position in pixels
+	// Returns integer
+	//
+	// http://stackoverflow.com/questions/871399/cross-browser-method-for-detecting-the-scrolltop-of-the-browser-window#872537
+	{
+	  if( typeof pageYOffset != 'undefined' ) //most browsers except IE before #9
+	    return pageYOffset
+	  
+	  var b = document.body //IE 'quirks'
+	  var d = document.documentElement //IE with doctype
+	  d = d.clientHeight ? d : b
+	  return d.scrollTop
+	},
   
   touch: function() 
   // eina.touch()
